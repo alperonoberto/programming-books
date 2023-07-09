@@ -1,0 +1,15 @@
+---
+    const {
+        id,
+        title,
+        img
+    } = Astro.props
+---
+    <a 
+    href=`/${id}`
+    class="hover:scale-105 inline-block transition-all hover:shadow-2xl">
+        <img
+        class="aspect-[389/500] h-full max-w-full rounded object-cover" 
+        src={img} 
+        alt={title}>
+    </a>

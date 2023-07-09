@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { bookList as books } from "../data/book-list";
+const { book } = Astro.params;
+const info = books.find((b) => b.id === book);
+
+if (!info) {
+    return Astro.redirect("/404");
+}
+---
+
+<Layout title={info.title as string}>
+    <main class="m-auto max-w-4xl my-10">
+        <div class="grid grid-cols-4 gap-x-4">
+            <div class="flex flex-col col-span-2">
+                <picture>
+                    <img
+                        class="aspect-[389/500] h-full max-w-full rounded object-cover"
+                        src={info.image}
+                        alt={info?.title}
+                    />
+                </picture>
+            </div>
+            <aside class="col-span-2">
+                <h1 class="font-black uppercase text-4xl mb-1">
+                    {info.title}
+                </h1>
+                <p class="text-justify">{info.description}</p>
+                <p>
+                    <strong>Author(s):</strong>
+                    <span class="text-zinc-800 font-medium"
+                        >{
+                            info.author ? info.author : info.authors?.join(", ")
+                        }</span
+                    >
+                </p>
+            </aside>
+        </div>
+    </main>
+</Layout>
